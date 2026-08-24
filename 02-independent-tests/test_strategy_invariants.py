@@ -113,9 +113,12 @@ def _momentum_exit_harness():
         symbol, qty = "AAA", 10.0
 
     broker = BacktestBroker(initial_balance=100_000, random_seed=1)
-    s = MomentumStrategy(broker=broker, parameters={"symbols": ["AAA"], "use_trailing_stop": True,
-                                                    "trailing_stop_pct": 0.02,
-                                                    "trailing_activation_pct": 0.02})
+    params = MomentumStrategy.default_parameters(None)  # literal dict; no self use
+    params.update({"symbols": ["AAA"], "use_trailing_stop": True,
+                   "trailing_stop_pct": 0.02, "trailing_activation_pct": 0.02})
+    s = MomentumStrategy(broker=broker, parameters=params)
+    run(s.initialize())  # tracking dicts are created in initialize(), not __init__
+    assert hasattr(s, "entry_prices"), "initialize() did not create tracking state"
     exits = []
 
     async def _positions():
@@ -159,30 +162,55 @@ class _Acct:
 
 
 class _EqBroker:
-    def __init__(self, path):
-        self.path, self.i = list(path), 0
+    """Fake broker with SETTABLE equity (the breaker may call get_account more than once per check)."""
+    def __init__(self, equity):
+        self.equity = equity
 
     async def get_account(self):
-        a = _Acct(self.path[min(self.i, len(self.path) - 1)])
-        self.i += 1
-        return a
+        return _Acct(self.equity)
+
+    def get_positions(self):
+        return []
+
+    async def get_all_positions(self):
+        return []
 
 
-def test_I4_breaker_does_not_trip_below_limit_and_trips_at_limit():
-    cb = CircuitBreaker(max_daily_loss=0.03, use_economic_calendar=False)
-    run(cb.initialize(_EqBroker([100_000, 98_000, 97_000, 96_900])))
+def _breaker(max_daily_loss=0.03):
+    cb = CircuitBreaker(max_daily_loss=max_daily_loss, use_economic_calendar=False,
+                        auto_close_positions=False)
+    b = _EqBroker(100_000)
+    run(cb.initialize(b))
     cb._account_cache_ttl = 0
-    assert run(cb.check_and_halt()) is False   # -2.0%
-    assert run(cb.check_and_halt()) is False   # -3.0% exactly → depends on >=; record either way
-    assert run(cb.check_and_halt()) is True    # -3.1%
+    return cb, b
+
+
+def test_I4_breaker_does_not_trip_below_both_thresholds():
+    # documented design: daily-loss limit (3%) AND a rapid-drawdown trip at 67% of it (2.01%)
+    cb, b = _breaker()
+    b.equity = 98_500  # -1.5%: below both
+    assert run(cb.check_and_halt()) is False
+    assert not cb.is_halted()
+
+
+def test_I4_breaker_trips_at_daily_limit():
+    cb, b = _breaker()
+    b.equity = 96_900  # -3.1%
+    assert run(cb.check_and_halt()) is True
     assert cb.is_halted()
 
 
+def test_I4_breaker_rapid_drawdown_trips_before_daily_limit():
+    cb, b = _breaker()
+    b.equity = 97_800  # -2.2%: above the 2.01% rapid threshold, below the 3% daily limit
+    assert run(cb.check_and_halt()) is True, "rapid-drawdown trip (0.67 × limit) did not fire"
+
+
 def test_I4_breaker_stays_halted_even_if_equity_recovers():
-    cb = CircuitBreaker(max_daily_loss=0.03, use_economic_calendar=False)
-    run(cb.initialize(_EqBroker([100_000, 96_000, 100_000])))
-    cb._account_cache_ttl = 0
+    cb, b = _breaker()
+    b.equity = 96_000
     assert run(cb.check_and_halt()) is True
+    b.equity = 100_000
     assert run(cb.check_and_halt()) is True, "halt released without an explicit reset"
 
 

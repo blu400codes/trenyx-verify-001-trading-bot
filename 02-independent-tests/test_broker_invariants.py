@@ -164,13 +164,16 @@ def test_I6_default_construction_is_deterministic_or_documented():
 # silent failure — data that does not exist must not be invented
 # ---------------------------------------------------------------------------
 def test_silent_failure_unknown_symbol_must_not_yield_fabricated_prices():
+    """A broker asked for history of a symbol it has no data for must fail loudly
+    (or return nothing) — never return synthetic random bars."""
     b = BacktestBroker(initial_balance=10_000)
-    with pytest.raises(Exception):
-        # A production broker asked for history of a symbol it has no data for
-        # must fail loudly, not return synthetic random bars.
+    try:
         df = b.get_historical_prices("ZZZZ_NOT_A_SYMBOL", days=30)
-        assert df is None or len(df) == 0, "fabricated price history returned"
-        raise ValueError("fabricated price history returned")
+    except Exception:
+        return  # loud failure: acceptable
+    assert df is None or len(df) == 0, (
+        f"fabricated price history returned: {len(df)} synthetic bars for an unknown symbol"
+    )
 
 
 # ---------------------------------------------------------------------------
