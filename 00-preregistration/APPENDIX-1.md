@@ -17,3 +17,5 @@ The plan above is unchanged (hash stands). Additions only:
    the backtest broker has no commission model at all (Alpaca is commission-free;
    regulatory sell-side fees are not modeled). D03 is recorded N/A with this reason and
    the absence itself is assessed in findings.
+
+4. **Timezone on the target's commit date.** The plan says the pinned commit is dated 2026-08-19; that is EDT — GitHub shows 2026-08-20T03:20:19Z. Same instant.

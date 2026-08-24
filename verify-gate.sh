@@ -18,7 +18,6 @@ done < <(git ls-files '*.sha256' | grep -v '^05-receipt/')   # receipts are root
 # 2) hand-typed times: HH:MM in prose must be followed by a zone (EDT/EST/UTC/Z) or sit on a line with a commit hash
 while IFS= read -r line; do
   f=${line%%:*}; rest=${line#*:}
-  case "$f" in CORRECTIONS.md) continue;; esac
   if ! grep -qE '[0-9]{1,2}:[0-9]{2}(:[0-9]{2})? ?(EDT|EST|UTC|Z|[+-][0-9]{4})' <<<"$rest" && ! grep -qE '\b[0-9a-f]{7,40}\b' <<<"$rest"; then
     say "FAIL time: unanchored clock time in $line"; fail=1
   fi

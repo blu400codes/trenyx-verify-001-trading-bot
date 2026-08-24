@@ -8,8 +8,7 @@ the kind of thing this engagement exists to catch, and they were ours.
    byte-for-byte to its first-commit content (hash `c5f4bf26…` matches again); the appendix
    lives in `APPENDIX-1.md`. Rule adopted: a hashed document is never edited — additions are
    separate files.
-2. **Hand-written times were wrong.** Documents claimed 16:05, 16:45, 17:03 for events whose
-   commits are stamped 15:23–15:35 EDT. The in-text times were estimates typed by the
+2. **Hand-written times were wrong.** Documents claimed 16:05, 16:45 and 17:03 (no zone, no anchor) for events committed at 15:23:25 EDT (1e5c3b7) and 15:33:43 EDT (68a1232). The in-text times were estimates typed by the
    auditor, not clock reads. They are replaced with commit-anchored times, and the rule
    adopted is: no hand-written timestamps in any artifact — every time is taken from `date`
    or `git log`.

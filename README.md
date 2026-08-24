@@ -1,7 +1,7 @@
 # trenyx-verify-001 — independent verification of an AI-built trading system
 
 **Target:** [gr8monk3ys/trading-bot](https://github.com/gr8monk3ys/trading-bot) at commit
-`52b8dffebb683ecadff753f5efc178b4ea21a029` (2026-08-19). A Python trading system (Alpaca paper/live broker, momentum +
+`52b8dffebb683ecadff753f5efc178b4ea21a029` (committed 2026-08-19 EDT / 2026-08-20T03:20:19Z). A Python trading system (Alpaca paper/live broker, momentum +
 mean-reversion strategies, backtest engine, risk manager) whose commit history is
 57% `Co-Authored-By: Claude` (157 of 275 commits) — i.e. exactly the population
 [Trenyx](https://trenyx-site.onrender.com/work-with-me.html) sells verification for.
