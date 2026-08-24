@@ -1,22 +1,9 @@
-# Interim receipt — artifacts published as of 2026-08-24T19:35:45Z
+# Interim receipt — artifacts published as of 2026-08-24T21:08:46Z (17:08:46 EDT)
 
 Target: gr8monk3ys/trading-bot @ 52b8dffebb683ecadff753f5efc178b4ea21a029
-Engagement repo HEAD: 3450a38737e75d5bcd01629a987c3eee1aa49606
+Engagement repo HEAD at issue: 037bd37d11d3d9a79a538571bae8a7e255f62fac (this receipt is committed on top of it)
+Supersedes the 15:35 EDT interim receipt (da26a01), which hashed files later corrected — see CORRECTIONS.md.
 
-```
-09e8212964d33e09326374349bfe3029c68fbbf3629ec1eff2ced53748409f07  00-preregistration/ATTACK-PLAN.md
-dfe4a3e398988fcab38e04225ef1b65a7f4fb9bce5f900e7902348a84ee58511  00-preregistration/ATTACK-PLAN.sha256
-1bbdc312d3847cc3bad3e43cc5d88faf294d7041565f7aa00f5556da05cf93fa  01-baseline/BASELINE.md
-01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b  01-baseline/baseline_failures.txt
-78d8c1583fff6e9b4befe8d8bc0e246adab655e9e988dca3f08524ae7de3c8fb  02-independent-tests/RESULTS.md
-65730e90a3d277aa55d5d0652f6cabec4dcb83cf686d5a99c6b98ae67ce3c18e  02-independent-tests/run.sh
-87032e78e05f7027337d918cbc39c77913ec659390332cf1e352ee0850c4201f  02-independent-tests/test_broker_invariants.py
-617b099b775b58856348077aac8c8bd9f529ac46f9a6e3ecb7649b1a167f920e  02-independent-tests/test_strategy_invariants.py
-2cf2d1c682ed597f64f8665b2147504af56ca00fa193cf50b2bf40bc31e1af73  03-planted-defects/matrix.json
-b6341bbf891a8047e3acaebfc9c55523c023353c9213c4db3a237756a760fa8f  03-planted-defects/matrix.md
-16481be6e047fbd4378766ac20a4bda4621ebc76009468a2e4045a69a676630b  03-planted-defects/plant.py
-d6ca9496c812f9e565ca7b6e935746f01cb6f9bf11775b6a9f2ec279b1868c41  03-planted-defects/run_matrix.py
-c81a7132122f21fd91b6cdded466d283b8f6a929da5a09fa34099195f3438c0f  README.md
-```
+Verify: `shasum -a 256 -c 05-receipt/RECEIPT-interim.sha256` from the repo root.
 
 Final receipt (including 04-findings/) is issued after maintainer disclosure closes.
