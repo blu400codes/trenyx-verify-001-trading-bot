@@ -16,7 +16,7 @@ production"). Their tests: 121 files, ~46k LOC, not read before ours were writte
 
 | folder | what's in it | how you check it |
 |---|---|---|
-| `00-preregistration/` | the attack plan, written BEFORE any implementation was read, + its SHA-256 | the plan's hash is in this repo's first commit; the plan never changes after |
+| `00-preregistration/` | the attack plan, written BEFORE any implementation was read, + its SHA-256 (`cd 00-preregistration && shasum -a 256 -c ATTACK-PLAN.sha256`) | the plan file is byte-frozen (additions live in `APPENDIX-1.md`); hash matches the first commit |
 | `01-baseline/` | the target's own suite, run as-is: counts, failures, environment | re-run it |
 | `02-independent-tests/` | tests written blind to theirs, targeting the pre-registered invariants | run them against the pinned commit |
 | `03-planted-defects/` | one minimal patch per pre-registered semantic defect + the detection matrix (which of THEIR tests caught it) | apply a patch, run their suite, compare |
@@ -38,11 +38,15 @@ these numbers describe *this* attack, not a universal score.
 
 ## Rules this engagement runs under
 
-1. **Pre-registration:** the attack plan is committed and hashed before the code is read; the plan is never edited afterwards (additions go in a dated appendix).
+1. **Pre-registration:** the attack plan is committed and hashed before the code is read; the plan file is never edited afterwards (additions go in `APPENDIX-1.md`). On client engagements the hash is emailed to the client before any code is shared; on public samples it is anchored externally. This sample's pre-registration rests on commit order only — see `CORRECTIONS.md`.
 2. **Blind tests:** our tests are written without reading the target's `tests/`.
 3. **Disclosure before publication:** planted defects and the detection matrix publish as produced (they describe the tests, not exploitable behavior). Any REAL defect goes to the maintainer first; `04-findings/` publishes after they have had the chance to see it.
 4. **No guaranteed bug count.** If nothing real is found, the folders above still fill.
 5. **Coverage is reported with its denominator** (the scenario list), never as a bare score.
+
+## Corrections
+
+An outside reviewer found three failures of this repo's own standard after publication. They are recorded, not hidden, in [`CORRECTIONS.md`](CORRECTIONS.md), together with the rules adopted because of them.
 
 ## Licensing
 
