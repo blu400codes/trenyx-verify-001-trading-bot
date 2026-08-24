@@ -56,8 +56,8 @@ DEFECTS = {
     "D07": dict(
         title="circuit-breaker comparison inverted (trips when SAFE)",
         file="utils/circuit_breaker.py",
-        old="            if daily_loss >= self.max_daily_loss:\n                await self._trigger_halt(current_equity, daily_loss, \"daily_loss_limit\")",
-        new="            if daily_loss <= self.max_daily_loss:\n                await self._trigger_halt(current_equity, daily_loss, \"daily_loss_limit\")",
+        old="            # Check if loss limit exceeded\n            if daily_loss >= self.max_daily_loss:",
+        new="            # Check if loss limit exceeded\n            if daily_loss <= self.max_daily_loss:",
     ),
     "D08": dict(
         title="kill switch flag set but never read by the order path",
@@ -102,8 +102,8 @@ DEFECTS = {
     "D13": dict(
         title="max-position limit bypassed (off-by-one)",
         file="strategies/momentum/strategy.py",
-        old="        if len(positions) >= self.max_positions:",
-        new="        if len(positions) > self.max_positions:",
+        old='        """Execute a buy signal for the given symbol."""\n        if len(positions) >= self.max_positions:',
+        new='        """Execute a buy signal for the given symbol."""\n        if len(positions) > self.max_positions:',
     ),
     "D14": dict(
         title="last bar of the window processed twice",
