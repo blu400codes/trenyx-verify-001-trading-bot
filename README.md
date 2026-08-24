@@ -23,6 +23,19 @@ production"). Their tests: 121 files, ~46k LOC, not read before ours were writte
 | `04-findings/` | confirmed / potential / design concern / recommendation, each with a reproduction | run the reproduction |
 | `05-receipt/` | SHA-256 of every artifact above, dated | hash the files yourself |
 
+## Results (2026-08-24)
+
+| measure | result |
+|---|---|
+| Target's own suite at baseline | 1,921 passed · 11 skipped · 0 failed (47 s) |
+| Planted semantic defects (pre-registered) | 14: 11 plantable · 2 native · 1 n/a |
+| **Caught by the target's tests** | **5 / 11** — escaped: one-bar lookahead, trailing stop anchored to entry, kill switch ignored, paper→live default, stale marks, double-processed final bar |
+| Independent scenarios (blind) | 26 — 17 pass · 8 fail · 1 skip |
+| **Confirmed defects** (each failing scenario reproduces one) | **8** — write-up in `04-findings/` after maintainer disclosure |
+
+Denominators are ours and published (`00-preregistration/`, `02-independent-tests/`):
+these numbers describe *this* attack, not a universal score.
+
 ## Rules this engagement runs under
 
 1. **Pre-registration:** the attack plan is committed and hashed before the code is read; the plan is never edited afterwards (additions go in a dated appendix).

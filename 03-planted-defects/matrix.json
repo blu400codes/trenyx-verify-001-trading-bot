@@ -1,0 +1,133 @@
+[
+  {
+    "id": "D01",
+    "title": "signal for bar t sees bar t (lookahead by one bar)",
+    "file": "engine/backtest/runner.py",
+    "status": "ESCAPED",
+    "new_failures": [],
+    "n_new": 0,
+    "seconds": 21,
+    "tail": "================ 1921 passed, 11 skipped, 66 warnings in 19.32s ================"
+  },
+  {
+    "id": "D02",
+    "title": "slippage sign flipped (fills improve the price)",
+    "file": "brokers/backtest/execution.py",
+    "status": "CAUGHT",
+    "new_failures": [
+      "tests/unit/brokers/test_backtest_broker.py::TestRealisticScenarios::test_round_trip_trade",
+      "tests/unit/brokers/test_backtest_broker.py::TestSlippageCalculation::test_slippage_buy_market_order",
+      "tests/unit/brokers/test_backtest_broker.py::TestSlippageCalculation::test_slippage_large_order_more_impact",
+      "tests/unit/brokers/test_backtest_broker.py::TestSlippageCalculation::test_slippage_limit_order_less_than_market",
+      "tests/unit/brokers/test_backtest_broker.py::TestSlippageCalculation::test_slippage_sell_market_order",
+      "tests/unit/brokers/test_backtest_broker.py::TestSlippageCalculation::test_slippage_zero_spread",
+      "tests/unit/engine/test_backtest_end_liquidation.py::TestEndOfBacktestLiquidation::test_liquidation_uses_realistic_execution_profile"
+    ],
+    "n_new": 7,
+    "seconds": 21,
+    "tail": "=========== 7 failed, 1914 passed, 11 skipped, 66 warnings in 19.79s ==========="
+  },
+  {
+    "id": "D05",
+    "title": "trailing stop anchored to ENTRY, not running peak",
+    "file": "strategies/momentum/signals.py",
+    "status": "ESCAPED",
+    "new_failures": [],
+    "n_new": 0,
+    "seconds": 21,
+    "tail": "================ 1921 passed, 11 skipped, 66 warnings in 19.53s ================"
+  },
+  {
+    "id": "D06",
+    "title": "strategy exit signal ignored (regression of the documented bug)",
+    "file": "strategies/simple_ma_strategy.py",
+    "status": "CAUGHT",
+    "new_failures": [
+      "tests/unit/strategies/test_simple_ma_strategy.py::TestExecuteTrade::test_execute_trade_sell_closes_position",
+      "tests/unit/strategies/test_simple_ma_strategy.py::TestExecuteTrade::test_execute_trade_with_dict_position"
+    ],
+    "n_new": 2,
+    "seconds": 21,
+    "tail": "=========== 2 failed, 1919 passed, 11 skipped, 66 warnings in 19.71s ==========="
+  },
+  {
+    "id": "D07",
+    "title": "circuit-breaker comparison inverted (trips when SAFE)",
+    "file": "utils/circuit_breaker.py",
+    "status": "CAUGHT",
+    "new_failures": [
+      "tests/unit/utils/test_circuit_breaker.py::TestCheckAndHalt::test_check_halts_on_rapid_drawdown",
+      "tests/unit/utils/test_circuit_breaker.py::TestCheckAndHalt::test_check_no_halt_when_profit",
+      "tests/unit/utils/test_circuit_breaker.py::TestCheckAndHalt::test_check_no_halt_within_limit",
+      "tests/unit/utils/test_circuit_breaker.py::TestEdgeCases::test_just_under_limit_does_not_halt",
+      "tests/unit/utils/test_circuit_breaker.py::TestEdgeCases::test_multiple_checks_within_limit"
+    ],
+    "n_new": 5,
+    "seconds": 21,
+    "tail": "=========== 5 failed, 1916 passed, 11 skipped, 66 warnings in 19.71s ==========="
+  },
+  {
+    "id": "D08",
+    "title": "kill switch flag set but never read by the order path",
+    "file": "strategies/base/position_sizing.py",
+    "status": "ESCAPED",
+    "new_failures": [],
+    "n_new": 0,
+    "seconds": 21,
+    "tail": "================ 1921 passed, 11 skipped, 66 warnings in 19.27s ================"
+  },
+  {
+    "id": "D09",
+    "title": "paper/live default flips to LIVE",
+    "file": "config.py",
+    "status": "ESCAPED",
+    "new_failures": [],
+    "n_new": 0,
+    "seconds": 21,
+    "tail": "================ 1921 passed, 11 skipped, 66 warnings in 19.71s ================"
+  },
+  {
+    "id": "D11",
+    "title": "broker exception swallowed; submit returns success-shaped None",
+    "file": "brokers/alpaca/orders.py",
+    "status": "CAUGHT",
+    "new_failures": [
+      "tests/unit/brokers/test_alpaca_broker_audit.py::test_internal_submit_failure_writes_order_rejected"
+    ],
+    "n_new": 1,
+    "seconds": 21,
+    "tail": "=========== 1 failed, 1920 passed, 11 skipped, 66 warnings in 19.63s ==========="
+  },
+  {
+    "id": "D12",
+    "title": "equity marked at previous bar's price (stale mark)",
+    "file": "brokers/backtest/core.py",
+    "status": "ESCAPED",
+    "new_failures": [],
+    "n_new": 0,
+    "seconds": 21,
+    "tail": "================ 1921 passed, 11 skipped, 66 warnings in 19.53s ================"
+  },
+  {
+    "id": "D13",
+    "title": "max-position limit bypassed (off-by-one)",
+    "file": "strategies/momentum/strategy.py",
+    "status": "CAUGHT",
+    "new_failures": [
+      "tests/unit/strategies/test_momentum_strategy.py::TestExecuteSignal::test_execute_signal_respects_max_positions"
+    ],
+    "n_new": 1,
+    "seconds": 21,
+    "tail": "=========== 1 failed, 1920 passed, 11 skipped, 66 warnings in 19.77s ==========="
+  },
+  {
+    "id": "D14",
+    "title": "last bar of the window processed twice",
+    "file": "engine/backtest/runner.py",
+    "status": "ESCAPED",
+    "new_failures": [],
+    "n_new": 0,
+    "seconds": 21,
+    "tail": "================ 1921 passed, 11 skipped, 66 warnings in 19.57s ================"
+  }
+]
