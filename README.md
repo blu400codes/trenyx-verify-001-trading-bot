@@ -31,7 +31,7 @@ production"). Their tests: 121 files, ~46k LOC, not read before ours were writte
 | Planted semantic defects (pre-registered) | 14: 11 plantable · 2 native · 1 n/a |
 | **Caught by the target's tests** | **5 / 11** — escaped: one-bar lookahead, trailing stop anchored to entry, kill switch ignored, paper→live default, stale marks, double-processed final bar |
 | Independent scenarios (blind) | 26 — 17 pass · 8 fail · 1 skip |
-| **Confirmed defects** (each failing scenario reproduces one) | **8** — disclosed to the maintainer in [gr8monk3ys/trading-bot#99](https://github.com/gr8monk3ys/trading-bot/issues/99) (2026-08-25 13:15 EDT); the safety-adjacent item also via their private advisory channel. `04-findings/` publishes after the fix lands or 72 hours, whichever first |
+| **Confirmed defects** (each failing scenario reproduces one) | **8** — disclosed to the maintainer in [gr8monk3ys/trading-bot#99](https://github.com/gr8monk3ys/trading-bot/issues/99) (created 2026-08-25T17:14:03Z / 13:14 EDT); the safety-adjacent item also via their private advisory channel. **[`04-findings/`](04-findings/FINDINGS.md) published 2026-08-31** — the 72-hour window elapsed 2026-08-28 with no maintainer response; the advisory-channel item is not restated there (its specifics publish after a fix lands — the findings note says precisely what is and isn't already visible in this repo) |
 
 Denominators are ours and published (`00-preregistration/`, `02-independent-tests/`):
 these numbers describe *this* attack, not a universal score.
